@@ -4,4 +4,3 @@ dist
 .turbo
 coverage
 *.env*
-!*.env.example
