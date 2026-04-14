@@ -9,8 +9,11 @@ import { migrate } from "drizzle-orm/postgres-js/migrator";
 import { resolve } from "path";
 import postgres from "postgres";
 
-// Load .env from packages/db root when running locally
-config({ path: resolve(__dirname, "../.env") });
+// Load .env from packages/db root when running locally, but only if
+// DATABASE_URL_DIRECT isn't already set in the environment (shell takes priority)
+if (!process.env.DATABASE_URL_DIRECT) {
+  config({ path: resolve(__dirname, "../.env") });
+}
 
 const connectionString = process.env.DATABASE_URL_DIRECT;
 if (!connectionString) {

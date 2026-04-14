@@ -5,6 +5,7 @@ export interface User {
   email: string;
   name: string | null;
   googleId: string | null;
+  hasSeenOnboarding: boolean;
   createdAt: Date;
   updatedAt: Date;
 }

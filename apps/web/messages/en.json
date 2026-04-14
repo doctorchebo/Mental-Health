@@ -1,0 +1,143 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "logToday": "Log Today",
+    "logout": "Log out"
+  },
+  "landing": {
+    "headline": "Your daily mental wellness journal",
+    "subheadline": "Track your mood, sleep, anxiety, and activity — all in one place, designed for women's mental health.",
+    "signIn": "Sign in with Google"
+  },
+  "dashboard": {
+    "greeting": "Welcome back, {name}!",
+    "subtitle": "Here's your wellness snapshot.",
+    "loading": "Loading your logs…",
+    "empty": "No entries yet. Tap \"Log Today\" to get started!",
+    "logToday": "Log Today",
+    "charts": {
+      "moodTrend": "Mood Trend",
+      "sleep": "Sleep",
+      "stressActivity": "Stress vs. Activity"
+    }
+  },
+  "log": {
+    "pageTitle": "Daily Check-In",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Save log",
+    "saving": "Saving…",
+    "success": "Your log was saved!",
+    "error": "Couldn't save your log. Please try again.",
+    "steps": {
+      "mood": {
+        "title": "How are you feeling today?",
+        "description": "Rate your overall mood on a scale from 1 to 10.",
+        "low": "Very low",
+        "high": "Excellent"
+      },
+      "anxietyStress": {
+        "title": "Anxiety & Stress",
+        "description": "How anxious and stressed are you feeling?",
+        "anxietyLabel": "Anxiety Level",
+        "stressLabel": "Stress Level",
+        "low": "None",
+        "high": "Overwhelming"
+      },
+      "sleep": {
+        "title": "How did you sleep?",
+        "description": "Tell us about last night's sleep.",
+        "hoursLabel": "Hours of sleep",
+        "qualityLabel": "Sleep quality (1–5)",
+        "low": "Very poor",
+        "high": "Excellent"
+      },
+      "activity": {
+        "title": "Physical Activity",
+        "description": "Did you move your body today?",
+        "minutesLabel": "Duration (minutes)",
+        "typesLabel": "Type of activity",
+        "types": {
+          "none": "No activity",
+          "walking": "Walking",
+          "running": "Running",
+          "yoga": "Yoga",
+          "gym": "Gym",
+          "swimming": "Swimming",
+          "cycling": "Cycling",
+          "dancing": "Dancing",
+          "other": "Other"
+        }
+      },
+      "social": {
+        "title": "Social & Reflections",
+        "description": "How many meaningful social interactions did you have?",
+        "interactionsLabel": "Social interactions today",
+        "notesLabel": "Notes (optional)",
+        "notesPlaceholder": "Anything else on your mind…"
+      },
+      "symptoms": {
+        "title": "Symptoms",
+        "description": "Select any symptoms you noticed today.",
+        "depressionLabel": "Depression symptoms",
+        "anxietyLabel": "Anxiety symptoms",
+        "disturbancesLabel": "Sleep disturbances",
+        "depressionSymptoms": {
+          "low_energy": "Low energy",
+          "hopelessness": "Hopelessness",
+          "loss_of_interest": "Loss of interest",
+          "appetite_changes": "Appetite changes",
+          "difficulty_concentrating": "Difficulty concentrating",
+          "worthlessness": "Worthlessness",
+          "crying_spells": "Crying spells"
+        },
+        "anxietySymptoms": {
+          "racing_thoughts": "Racing thoughts",
+          "restlessness": "Restlessness",
+          "muscle_tension": "Muscle tension",
+          "irritability": "Irritability",
+          "panic_attacks": "Panic attacks",
+          "avoidance": "Avoidance",
+          "worry": "Excessive worry"
+        },
+        "disturbances": {
+          "nightmares": "Nightmares",
+          "insomnia": "Insomnia",
+          "waking_early": "Waking early",
+          "restless": "Restless sleep",
+          "sleep_apnea": "Sleep apnea",
+          "other": "Other"
+        }
+      }
+    }
+  },
+  "onboarding": {
+    "step1": {
+      "title": "Welcome to LunaJoy!",
+      "content": "This is your personal wellness dashboard. Let's take a quick tour."
+    },
+    "step2": {
+      "title": "Your wellness charts",
+      "content": "After a few entries, you'll see your mood, sleep, and stress patterns here."
+    },
+    "step3": {
+      "title": "Log your day",
+      "content": "Tap here to record your daily mood, sleep, and wellness in under 2 minutes."
+    },
+    "step4": {
+      "title": "Switch language",
+      "content": "You can switch between English and Spanish anytime."
+    },
+    "back": "Back",
+    "next": "Next",
+    "skip": "Skip tour",
+    "finish": "Got it!"
+  },
+  "locale": {
+    "en": "EN",
+    "es": "ES"
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again."
+  }
+}

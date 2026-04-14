@@ -1,0 +1,275 @@
+{
+  "nav": {
+    "dashboard": "Panel",
+    "logToday": "Registrar hoy",
+    "logout": "Cerrar sesión"
+  },
+  "landing": {
+    "headline": "Tu diario personal de bienestar mental",
+    "subheadline": "Registra tu estado de ánimo, sueño, ansiedad y actividad — en un solo lugar, diseñado para la salud mental de la mujer.",
+    "signIn": "Iniciar sesión con Google"
+  },
+  "dashboard": {
+    "greeting": "¡Bienvenida, {name}!",
+    "subtitle": "Aquí está tu resumen de bienestar.",
+    "loading": "Cargando tus registros…",
+    "empty": "Aún no hay entradas. ¡Toca \"Registrar hoy\" para empezar!",
+    "logToday": "Registrar hoy",
+    "charts": {
+      "moodTrend": "Tendencia del ánimo",
+      "sleep": "Sueño",
+      "stressActivity": "Estrés vs. Actividad"
+    }
+  },
+  "log": {
+    "pageTitle": "Check-in diario",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "submit": "Guardar registro",
+    "saving": "Guardando…",
+    "success": "¡Tu registro fue guardado!",
+    "error": "No se pudo guardar tu registro. Por favor, inténtalo de nuevo.",
+    "steps": {
+      "mood": {
+        "title": "¿Cómo te sientes hoy?",
+        "description": "Califica tu estado de ánimo general del 1 al 10.",
+        "low": "Muy bajo",
+        "high": "Excelente"
+      },
+      "anxietyStress": {
+        "title": "Ansiedad y Estrés",
+        "description": "¿Qué tan ansiosa y estresada te sientes?",
+        "anxietyLabel": "Nivel de ansiedad",
+        "stressLabel": "Nivel de estrés",
+        "low": "Ninguno",
+        "high": "Abrumador"
+      },
+      "sleep": {
+        "title": "¿Cómo dormiste?",
+        "description": "Cuéntanos sobre tu sueño de anoche.",
+        "hoursLabel": "Horas de sueño",
+        "qualityLabel": "Calidad del sueño (1–5)",
+        "low": "Muy malo",
+        "high": "Excelente"
+      },
+      "activity": {
+        "title": "Actividad Física",
+        "description": "¿Moviste tu cuerpo hoy?",
+        "minutesLabel": "Duración (minutos)",
+        "typesLabel": "Tipo de actividad",
+        "types": {
+          "none": "Sin actividad",
+          "walking": "Caminar",
+          "running": "Correr",
+          "yoga": "Yoga",
+          "gym": "Gimnasio",
+          "swimming": "Natación",
+          "cycling": "Ciclismo",
+          "dancing": "Bailar",
+          "other": "Otro"
+        }
+      },
+      "social": {
+        "title": "Social y Reflexiones",
+        "description": "¿Cuántas interacciones sociales significativas tuviste?",
+        "interactionsLabel": "Interacciones sociales hoy",
+        "notesLabel": "Notas (opcional)",
+        "notesPlaceholder": "¿Algo más en tu mente…?"
+      },
+      "symptoms": {
+        "title": "Síntomas",
+        "description": "Selecciona los síntomas que notaste hoy.",
+        "depressionLabel": "Síntomas de depresión",
+        "anxietyLabel": "Síntomas de ansiedad",
+        "disturbancesLabel": "Perturbaciones del sueño",
+        "depressionSymptoms": {
+          "low_energy": "Baja energía",
+          "hopelessness": "Desesperanza",
+          "loss_of_interest": "Pérdida de interés",
+          "appetite_changes": "Cambios en el apetito",
+          "difficulty_concentrating": "Dificultad para concentrarse",
+          "worthlessness": "Sentimientos de inutilidad",
+          "crying_spells": "Episodios de llanto"
+        },
+        "anxietySymptoms": {
+          "racing_thoughts": "Pensamientos acelerados",
+          "restlessness": "Inquietud",
+          "muscle_tension": "Tensión muscular",
+          "irritability": "Irritabilidad",
+          "panic_attacks": "Ataques de pánico",
+          "avoidance": "Evitación",
+          "worry": "Preocupación excesiva"
+        },
+        "disturbances": {
+          "nightmares": "Pesadillas",
+          "insomnia": "Insomnio",
+          "waking_early": "Despertar temprano",
+          "restless": "Sueño intranquilo",
+          "sleep_apnea": "Apnea del sueño",
+          "other": "Otro"
+        }
+      }
+    }
+  },
+  "onboarding": {
+    "step1": {
+      "title": "¡Bienvenida a LunaJoy!",
+      "content": "Este es tu panel personal de bienestar. Hagamos un recorrido rápido."
+    },
+    "step2": {
+      "title": "Tus gráficas de bienestar",
+      "content": "Después de algunas entradas, verás tus patrones de ánimo, sueño y estrés aquí."
+    },
+    "step3": {
+      "title": "Registra tu día",
+      "content": "Toca aquí para registrar tu estado de ánimo, sueño y bienestar en menos de 2 minutos."
+    },
+    "step4": {
+      "title": "Cambiar idioma",
+      "content": "Puedes cambiar entre inglés y español en cualquier momento."
+    },
+    "back": "Atrás",
+    "next": "Siguiente",
+    "skip": "Saltar recorrido",
+    "finish": "¡Entendido!"
+  },
+  "locale": {
+    "en": "EN",
+    "es": "ES"
+  },
+  "errors": {
+    "generic": "Algo salió mal. Por favor, inténtalo de nuevo."
+  }
+}
+
+    "dashboard": "Panel",
+    "logToday": "Registrar hoy",
+    "logout": "Cerrar sesión",
+    "login": "Ingresar con Google"
+  },
+  "landing": {
+    "hero": "Tu diario de bienestar diario",
+    "subtitle": "Registra tu estado de ánimo, sueño y salud mental — todo en un solo lugar.",
+    "cta": "Comenzar — es gratis"
+  },
+  "dashboard": {
+    "title": "Mi Panel de Bienestar",
+    "welcome": "¡Bienvenida, {name}!",
+    "noLogs": "Aún no hay registros. ¡Comienza registrando hoy!",
+    "week": "7 días",
+    "month": "30 días",
+    "charts": {
+      "moodTrend": "Tendencia de ánimo",
+      "sleepPattern": "Patrón de sueño",
+      "stressActivity": "Estrés vs. Actividad",
+      "hours": "Horas",
+      "quality": "Calidad",
+      "stress": "Estrés",
+      "activityMin": "Actividad (min)"
+    }
+  },
+  "log": {
+    "title": "Registro diario",
+    "step": "Paso {current} de {total}",
+    "next": "Siguiente",
+    "back": "Atrás",
+    "submit": "Guardar registro",
+    "submitting": "Guardando…",
+    "success": "¡Tu registro fue guardado!",
+    "conflict": "Ya tienes un registro para hoy.",
+    "steps": {
+      "mood": {
+        "title": "¿Cómo te sientes hoy?",
+        "label": "Estado de ánimo",
+        "hint": "1 = muy bajo, 10 = excelente"
+      },
+      "anxietyStress": {
+        "title": "Ansiedad y estrés",
+        "anxietyLabel": "Nivel de ansiedad",
+        "stressLabel": "Nivel de estrés",
+        "hint": "1 = ninguno, 10 = abrumador"
+      },
+      "sleep": {
+        "title": "¿Cómo dormiste?",
+        "hoursLabel": "Horas de sueño",
+        "qualityLabel": "Calidad del sueño",
+        "disturbancesLabel": "Alteraciones (selecciona todas las que apliquen)",
+        "disturbances": {
+          "insomnia": "Insomnio",
+          "nightmares": "Pesadillas",
+          "frequent_waking": "Despertar frecuente",
+          "oversleeping": "Dormir en exceso"
+        }
+      },
+      "activity": {
+        "title": "Actividad física",
+        "typeLabel": "Tipo de actividad",
+        "minutesLabel": "Duración (minutos)",
+        "types": {
+          "none": "Sin actividad",
+          "walking": "Caminar",
+          "running": "Correr",
+          "yoga": "Yoga",
+          "strength_training": "Entrenamiento de fuerza",
+          "swimming": "Natación",
+          "cycling": "Ciclismo",
+          "other": "Otro"
+        }
+      },
+      "social": {
+        "title": "Interacciones sociales",
+        "label": "¿Cuántas interacciones significativas tuviste?",
+        "hint": "0 = ninguna, 10 = muchas"
+      },
+      "symptoms": {
+        "title": "Síntomas",
+        "depressionLabel": "Síntomas de depresión",
+        "anxietyLabel": "Síntomas de ansiedad",
+        "notesLabel": "Notas adicionales",
+        "notesPlaceholder": "¿Algo más que quieras anotar…?",
+        "depression": {
+          "low_mood": "Estado de ánimo bajo",
+          "loss_of_interest": "Pérdida de interés",
+          "fatigue": "Fatiga",
+          "worthlessness": "Sentimientos de inutilidad",
+          "concentration_issues": "Problemas de concentración"
+        },
+        "anxiety": {
+          "excessive_worry": "Preocupación excesiva",
+          "restlessness": "Inquietud",
+          "racing_heart": "Palpitaciones",
+          "shortness_of_breath": "Dificultad para respirar",
+          "intrusive_thoughts": "Pensamientos intrusivos"
+        }
+      }
+    }
+  },
+  "onboarding": {
+    "step1": {
+      "title": "¡Bienvenida a LunaJoy!",
+      "content": "Este es tu panel personal de bienestar. Hagamos un recorrido rápido."
+    },
+    "step2": {
+      "title": "Registra tu día",
+      "content": "Toca aquí para registrar tu estado de ánimo, sueño y bienestar en menos de 2 minutos."
+    },
+    "step3": {
+      "title": "Sigue tus tendencias",
+      "content": "Después de algunos registros, verás tus patrones aquí. Entenderte es el primer paso."
+    },
+    "step4": {
+      "title": "Cambiar idioma",
+      "content": "Puedes cambiar entre inglés y español en cualquier momento."
+    },
+    "skip": "Saltar recorrido",
+    "next": "Siguiente",
+    "finish": "¡Entendido!"
+  },
+  "locale": {
+    "en": "English",
+    "es": "Español"
+  },
+  "errors": {
+    "generic": "Algo salió mal. Por favor intenta de nuevo."
+  }
+}
