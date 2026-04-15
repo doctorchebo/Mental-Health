@@ -18,7 +18,54 @@
     "charts": {
       "moodTrend": "Tendencia del ánimo",
       "sleep": "Sueño",
-      "stressActivity": "Estrés vs. Actividad"
+      "stressActivity": "Estrés vs. Actividad",
+      "trendTitle": "Análisis de tendencias",
+      "frequencyTitle": "Frecuencia de síntomas y actividad",
+      "frequencyDesc": "Con qué frecuencia apareció cada síntoma o actividad en el período seleccionado.",
+      "noData": "Sin registros en este período.",
+      "entriesCount": "{count} registros",
+      "filter": {
+        "7days": "7 días",
+        "30days": "30 días"
+      },
+      "presets": {
+        "mental_health": "Bienestar central: ánimo, ansiedad y estrés en la misma escala (1–10).",
+        "mental_health_desc": "Bienestar central: ánimo, ansiedad y estrés en la misma escala (1–10).",
+        "sleep_analysis": "Cantidad de sueño (horas, barras) vs. calidad del sueño (1–5, línea).",
+        "sleep_analysis_desc": "Cantidad de sueño (horas, barras) vs. calidad del sueño (1–5, línea).",
+        "activity_mood": "Minutos de actividad (barras) junto al ánimo (línea) — observa el efecto del ejercicio.",
+        "activity_mood_desc": "Minutos de actividad (barras) junto al ánimo (línea) — observa el efecto del ejercicio.",
+        "social_wellness": "Interacciones sociales (1–5) vs. ánimo (1–10) — ¿te eleva la conexión social?",
+        "social_wellness_desc": "Interacciones sociales (1–5) vs. ánimo (1–10) — ¿te eleva la conexión social?",
+        "anxiety_stress": "Niveles de ansiedad y estrés lado a lado en escala 1–10.",
+        "anxiety_stress_desc": "Niveles de ansiedad y estrés lado a lado en escala 1–10."
+      },
+      "metrics": {
+        "moodRating": "Ánimo",
+        "anxietyLevel": "Ansiedad",
+        "stressLevel": "Estrés",
+        "sleepHours": "Horas de sueño",
+        "sleepQuality": "Calidad del sueño",
+        "activityMinutes": "Actividad (min)",
+        "socialInteractions": "Interacciones sociales"
+      },
+      "presetLabels": {
+        "mental_health": "Salud mental",
+        "sleep_analysis": "Análisis del sueño",
+        "activity_mood": "Actividad y ánimo",
+        "social_wellness": "Bienestar social",
+        "anxiety_stress": "Ansiedad y estrés"
+      },
+      "frequency": {
+        "depression": "Depresión",
+        "anxiety": "Ansiedad",
+        "sleep": "Sueño",
+        "activity": "Actividad"
+      },
+      "trendInfo": {
+        "title": "¿Cómo se calcula?",
+        "body": "El período seleccionado se divide en dos mitades. Para cada métrica, se compara el promedio de la segunda mitad con el de la primera. Un mayor ánimo, calidad del sueño, actividad e interacciones sociales cuentan como mejoras. Una menor ansiedad y estrés también cuentan como mejoras. Las horas de sueño son óptimas cerca de las 8h. El porcentaje general es el promedio de mejora en todas las métricas de este preset."
+      }
     }
   },
   "log": {
@@ -29,6 +76,12 @@
     "saving": "Guardando…",
     "success": "¡Tu registro fue guardado!",
     "error": "No se pudo guardar tu registro. Por favor, inténtalo de nuevo.",
+    "duplicateModal": {
+      "title": "Ya registraste hoy",
+      "description": "Ya tienes un registro para hoy. Guardar reemplazará el anterior con tus nuevas entradas.",
+      "cancel": "Cancelar",
+      "confirm": "Reemplazar registro"
+    },
     "steps": {
       "mood": {
         "title": "¿Cómo te sientes hoy?",

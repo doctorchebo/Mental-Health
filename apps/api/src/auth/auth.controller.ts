@@ -14,10 +14,11 @@ import { UsersService } from '../users/users.service';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 
+// Cross-origin cookies require sameSite: 'none' + secure: true
 const COOKIE_DEFAULTS = {
   httpOnly: true,
-  sameSite: 'lax' as const,
-  secure: process.env.NODE_ENV === 'production',
+  sameSite: 'none' as const,
+  secure: true,
 };
 
 @Controller('auth')
@@ -71,10 +72,12 @@ export class AuthController {
   }
 
   @Post('logout')
-  @UseGuards(JwtAuthGuard)
   logout(@Res() res: Response) {
-    res.clearCookie('access_token');
-    res.clearCookie('refresh_token', { path: '/api/auth/refresh' });
+    res.clearCookie('access_token', COOKIE_DEFAULTS);
+    res.clearCookie('refresh_token', {
+      ...COOKIE_DEFAULTS,
+      path: '/api/auth/refresh',
+    });
     return res.json({ ok: true });
   }
 

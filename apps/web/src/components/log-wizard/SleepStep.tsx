@@ -28,6 +28,9 @@ export default function SleepStep({
 
       <div className="flex flex-col gap-2">
         <Label>{t("hoursLabel")}</Label>
+        <span className="text-center text-3xl">
+          {sleepHoursEmoji(sleepHours)}
+        </span>
         <Slider
           min={0}
           max={12}
@@ -44,6 +47,9 @@ export default function SleepStep({
 
       <div className="flex flex-col gap-2">
         <Label>{t("qualityLabel")}</Label>
+        <span className="text-center text-3xl">
+          {SLEEP_QUALITY_EMOJI[sleepQuality - 1]}
+        </span>
         <Slider
           min={1}
           max={10}
@@ -60,3 +66,26 @@ export default function SleepStep({
     </div>
   );
 }
+
+function sleepHoursEmoji(h: number): string {
+  if (h <= 2) return "😵";
+  if (h <= 4) return "😫";
+  if (h <= 6) return "😕";
+  if (h <= 7.5) return "😐";
+  if (h <= 9) return "😊";
+  if (h <= 10.5) return "🙂";
+  return "😴";
+}
+
+const SLEEP_QUALITY_EMOJI = [
+  "😵",
+  "😫",
+  "😕",
+  "😐",
+  "🙂",
+  "😊",
+  "😄",
+  "😁",
+  "🤩",
+  "✨",
+];

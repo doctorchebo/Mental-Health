@@ -1,38 +1,72 @@
 "use client";
 
-import MoodTrendChart from "@/components/charts/MoodTrendChart";
-import SleepChart from "@/components/charts/SleepChart";
-import StressActivityChart from "@/components/charts/StressActivityChart";
+import ActivityDistributionChart from "@/components/charts/ActivityDistributionChart";
+import ChartPresetSelector, {
+  TrendInfoIcon,
+} from "@/components/charts/ChartPresetSelector";
+import CustomChart from "@/components/charts/CustomChart";
+import DateRangeFilter from "@/components/charts/DateRangeFilter";
+import SymptomFrequencyChart, {
+  type SymptomType,
+} from "@/components/charts/SymptomFrequencyChart";
+import LogTodayButton from "@/components/LogTodayButton";
 import Navbar from "@/components/Navbar";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/context/AuthContext";
 import { useLogs } from "@/context/LogsContext";
+import { CHART_PRESETS } from "@/lib/chart-presets";
+import { filterLogsByDateRange, type DateRange } from "@/lib/chart-utils";
 import { useLocale, useTranslations } from "next-intl";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
+
+const SYMPTOM_TABS: { value: SymptomType; labelKey: string }[] = [
+  { value: "depression", labelKey: "depression" },
+  { value: "anxiety", labelKey: "anxiety" },
+  { value: "sleep", labelKey: "sleep" },
+];
 
 export default function DashboardPage() {
   const t = useTranslations("dashboard");
+  const tCharts = useTranslations("dashboard.charts");
   const locale = useLocale();
   const { user, loading: authLoading } = useAuth();
   const { logs, loading: logsLoading } = useLogs();
   const router = useRouter();
 
+  const [dateRange, setDateRange] = useState<DateRange>("30d");
+  const [activePresetId, setActivePresetId] = useState(CHART_PRESETS[0].id);
+
   useEffect(() => {
     if (!authLoading && !user) router.replace(`/${locale}`);
   }, [authLoading, user, locale, router]);
+
+  const filteredLogs = useMemo(
+    () => filterLogsByDateRange(logs, dateRange),
+    [logs, dateRange],
+  );
+  const activePreset = useMemo(
+    () =>
+      CHART_PRESETS.find((p) => p.id === activePresetId) ?? CHART_PRESETS[0],
+    [activePresetId],
+  );
 
   if (authLoading || !user) return null;
 
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <main className="flex-1 container mx-auto px-4 py-6">
+      <main className="flex-1 container mx-auto px-4 py-6 space-y-6">
         {/* Header */}
         <div
-          className="flex items-center justify-between mb-6"
+          className="flex items-center justify-between"
           data-tour="dashboard-header"
         >
           <div>
@@ -41,54 +75,101 @@ export default function DashboardPage() {
             </h1>
             <p className="text-muted-foreground text-sm">{t("subtitle")}</p>
           </div>
-          <Button asChild size="sm">
-            <Link href={`/${locale}/log`}>{t("logToday")}</Link>
-          </Button>
+          <LogTodayButton size="sm" data-tour="log-button" />
         </div>
 
-        {/* Charts */}
         {logsLoading ? (
           <p className="text-muted-foreground">{t("loading")}</p>
         ) : logs.length === 0 ? (
           <p className="text-muted-foreground">{t("empty")}</p>
         ) : (
-          <div
-            className="grid gap-4 md:grid-cols-1 lg:grid-cols-3"
-            data-tour="charts"
-          >
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium">
-                  {t("charts.moodTrend")}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <MoodTrendChart logs={logs} />
-              </CardContent>
-            </Card>
+          <>
+            {/* Controls row */}
+            <div
+              className="flex flex-wrap items-center gap-3"
+              data-tour="charts"
+            >
+              <DateRangeFilter value={dateRange} onChange={setDateRange} />
+              <span className="text-muted-foreground text-sm">
+                {filteredLogs.length === 0
+                  ? tCharts("noData")
+                  : tCharts("entriesCount", { count: filteredLogs.length })}
+              </span>
+            </div>
 
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium">
-                  {t("charts.sleep")}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <SleepChart logs={logs} />
-              </CardContent>
-            </Card>
+            {filteredLogs.length === 0 ? (
+              <p className="text-muted-foreground text-sm">
+                {tCharts("noData")}
+              </p>
+            ) : (
+              <>
+                {/* Trend chart */}
+                <Card>
+                  <CardHeader className="pb-3">
+                    <div className="flex flex-wrap items-start justify-between gap-3">
+                      <div>
+                        <CardTitle className="text-base flex items-center gap-1.5">
+                          {tCharts("trendTitle")}
+                          <TrendInfoIcon />
+                        </CardTitle>
+                        <CardDescription className="text-xs mt-0.5">
+                          {tCharts(`presets.${activePreset.descriptionKey}`)}
+                        </CardDescription>
+                      </div>
+                    </div>
+                    <ChartPresetSelector
+                      presets={CHART_PRESETS}
+                      activeId={activePresetId}
+                      onChange={setActivePresetId}
+                      logs={filteredLogs}
+                    />
+                  </CardHeader>
+                  <CardContent>
+                    <CustomChart logs={filteredLogs} preset={activePreset} />
+                  </CardContent>
+                </Card>
 
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium">
-                  {t("charts.stressActivity")}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <StressActivityChart logs={logs} />
-              </CardContent>
-            </Card>
-          </div>
+                {/* Frequency charts */}
+                <Card>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-base">
+                      {tCharts("frequencyTitle")}
+                    </CardTitle>
+                    <CardDescription className="text-xs">
+                      {tCharts("frequencyDesc")}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Tabs defaultValue="depression">
+                      <TabsList className="mb-4 flex-wrap h-auto">
+                        {SYMPTOM_TABS.map((tab) => (
+                          <TabsTrigger key={tab.value} value={tab.value}>
+                            {tCharts(`frequency.${tab.labelKey}`)}
+                          </TabsTrigger>
+                        ))}
+                        <TabsTrigger value="activity">
+                          {tCharts("frequency.activity")}
+                        </TabsTrigger>
+                      </TabsList>
+
+                      {SYMPTOM_TABS.map((tab) => (
+                        <TabsContent key={tab.value} value={tab.value}>
+                          <SymptomFrequencyChart
+                            logs={filteredLogs}
+                            symptomType={tab.value}
+                          />
+                        </TabsContent>
+                      ))}
+
+                      <TabsContent value="activity">
+                        <ActivityDistributionChart logs={filteredLogs} />
+                      </TabsContent>
+                    </Tabs>
+                  </CardContent>
+                </Card>
+              </>
+            )}
+          </>
         )}
       </main>
     </div>

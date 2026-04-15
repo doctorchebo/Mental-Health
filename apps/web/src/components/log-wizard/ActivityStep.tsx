@@ -42,6 +42,9 @@ export default function ActivityStep({
 
       <div className="flex flex-col gap-2">
         <Label>{t("minutesLabel")}</Label>
+        <span className="text-center text-3xl">
+          {activityMinutesEmoji(activityMinutes)}
+        </span>
         <Slider
           min={0}
           max={180}
@@ -73,4 +76,14 @@ export default function ActivityStep({
       </div>
     </div>
   );
+}
+
+function activityMinutesEmoji(min: number): string {
+  if (min === 0) return "🛍️";
+  if (min <= 15) return "🚶";
+  if (min <= 30) return "🏃";
+  if (min <= 60) return "💪";
+  if (min <= 90) return "🏋️";
+  if (min <= 120) return "🔥";
+  return "🏆";
 }

@@ -51,7 +51,7 @@ export async function logout(): Promise<void> {
 }
 
 export async function markOnboardingSeen(): Promise<void> {
-  await apiFetch("/api/auth/onboarding", { method: "POST" });
+  await apiFetch("/api/auth/onboarding-seen", { method: "POST" });
 }
 
 // ─── Logs ────────────────────────────────────────────────────────────────────
@@ -79,7 +79,7 @@ export function createLog(dto: CreateLogDTO): Promise<DailyLog> {
 
 export function updateLog(id: string, dto: UpdateLogDTO): Promise<DailyLog> {
   return apiFetch<DailyLog>(`/api/logs/${id}`, {
-    method: "PATCH",
+    method: "PUT",
     body: JSON.stringify(dto),
   });
 }

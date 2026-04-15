@@ -18,7 +18,7 @@ export default function LandingPage() {
     }
   }, [user, loading, locale, router]);
 
-  if (loading) return null;
+  if (loading || user) return null;
 
   return (
     <main className="flex flex-col items-center justify-center flex-1 px-4 py-20 text-center">

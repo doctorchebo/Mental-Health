@@ -27,9 +27,6 @@ export default function Navbar() {
           <LocaleSwitcher />
           {user && (
             <>
-              <Button asChild size="sm" data-tour="log-button">
-                <Link href={`/${locale}/log`}>{t("logToday")}</Link>
-              </Button>
               <Button variant="ghost" size="sm" onClick={logout}>
                 {t("logout")}
               </Button>

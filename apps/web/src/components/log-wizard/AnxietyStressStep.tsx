@@ -28,6 +28,9 @@ export default function AnxietyStressStep({
 
       <div className="flex flex-col gap-2">
         <Label>{t("anxietyLabel")}</Label>
+        <span className="text-center text-3xl">
+          {ANXIETY_EMOJI[anxietyLevel - 1]}
+        </span>
         <Slider
           min={1}
           max={10}
@@ -44,6 +47,9 @@ export default function AnxietyStressStep({
 
       <div className="flex flex-col gap-2">
         <Label>{t("stressLabel")}</Label>
+        <span className="text-center text-3xl">
+          {STRESS_EMOJI[stressLevel - 1]}
+        </span>
         <Slider
           min={1}
           max={10}
@@ -60,3 +66,28 @@ export default function AnxietyStressStep({
     </div>
   );
 }
+
+const ANXIETY_EMOJI = [
+  "😌",
+  "🙂",
+  "😐",
+  "😕",
+  "😟",
+  "😰",
+  "😨",
+  "😱",
+  "🤯",
+  "😵",
+];
+const STRESS_EMOJI = [
+  "🧘",
+  "😌",
+  "🙂",
+  "😐",
+  "😓",
+  "😫",
+  "😤",
+  "😡",
+  "🤬",
+  "🤯",
+];

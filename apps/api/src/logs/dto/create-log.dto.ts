@@ -12,37 +12,44 @@ import {
 } from 'class-validator';
 
 const SLEEP_DISTURBANCES = [
-  'insomnia',
   'nightmares',
-  'frequent_waking',
-  'oversleeping',
+  'insomnia',
+  'waking_early',
+  'restless',
+  'sleep_apnea',
+  'other',
 ] as const;
 
 const ACTIVITY_TYPES = [
   'walking',
   'running',
   'yoga',
-  'strength_training',
+  'gym',
   'swimming',
   'cycling',
+  'dancing',
   'other',
   'none',
 ] as const;
 
 const DEPRESSION_SYMPTOMS = [
-  'low_mood',
+  'low_energy',
+  'hopelessness',
   'loss_of_interest',
-  'fatigue',
+  'appetite_changes',
+  'difficulty_concentrating',
   'worthlessness',
-  'concentration_issues',
+  'crying_spells',
 ] as const;
 
 const ANXIETY_SYMPTOMS = [
-  'excessive_worry',
+  'racing_thoughts',
   'restlessness',
-  'racing_heart',
-  'shortness_of_breath',
-  'intrusive_thoughts',
+  'muscle_tension',
+  'irritability',
+  'panic_attacks',
+  'avoidance',
+  'worry',
 ] as const;
 
 export class CreateLogDto {

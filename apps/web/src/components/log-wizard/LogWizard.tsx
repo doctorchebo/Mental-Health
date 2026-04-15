@@ -55,7 +55,6 @@ export default function LogWizard() {
   >([]);
 
   async function handleSubmit() {
-    setSubmitting(true);
     const dto: CreateLogDTO = {
       logDate: todayISO(),
       moodRating,
@@ -71,11 +70,18 @@ export default function LogWizard() {
       anxietySymptoms,
       sleepDisturbances,
     };
+
+    await doSave(dto);
+  }
+
+  async function doSave(dto: CreateLogDTO) {
+    setSubmitting(true);
     try {
       await addLog(dto);
       toast.success(t("success"));
       router.push(`/${locale}/dashboard`);
-    } catch {
+    } catch (err) {
+      console.error("[LogWizard] save error:", err);
       toast.error(t("error"));
     } finally {
       setSubmitting(false);

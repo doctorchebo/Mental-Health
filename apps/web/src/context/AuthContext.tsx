@@ -8,8 +8,11 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from "react";
+
+const LOGIN_URL = getGoogleLoginUrl();
 
 interface AuthContextValue {
   user: User | null;
@@ -47,13 +50,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <AuthContext.Provider
-      value={{
-        user,
-        loading,
-        loginUrl: getGoogleLoginUrl(),
-        logout,
-        refreshUser,
-      }}
+      value={useMemo(
+        () => ({ user, loading, loginUrl: LOGIN_URL, logout, refreshUser }),
+        [user, loading, logout, refreshUser],
+      )}
     >
       {children}
     </AuthContext.Provider>

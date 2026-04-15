@@ -29,6 +29,9 @@ export default function SocialStep({
 
       <div className="flex flex-col gap-2">
         <Label>{t("interactionsLabel")}</Label>
+        <span className="text-center text-3xl">
+          {socialEmoji(socialInteractions)}
+        </span>
         <Slider
           min={0}
           max={20}
@@ -58,4 +61,15 @@ export default function SocialStep({
       </div>
     </div>
   );
+}
+
+function socialEmoji(n: number): string {
+  if (n === 0) return "🙈";
+  if (n <= 2) return "😶";
+  if (n <= 4) return "😐";
+  if (n <= 7) return "🙂";
+  if (n <= 10) return "😊";
+  if (n <= 14) return "😄";
+  if (n <= 17) return "🎉";
+  return "🌟";
 }

@@ -18,7 +18,54 @@
     "charts": {
       "moodTrend": "Mood Trend",
       "sleep": "Sleep",
-      "stressActivity": "Stress vs. Activity"
+      "stressActivity": "Stress vs. Activity",
+      "trendTitle": "Trend Analysis",
+      "frequencyTitle": "Symptom & Activity Frequency",
+      "frequencyDesc": "How often each symptom or activity appeared in the selected period.",
+      "noData": "No entries in this period.",
+      "entriesCount": "{count} entries",
+      "filter": {
+        "7days": "7 Days",
+        "30days": "30 Days"
+      },
+      "presets": {
+        "mental_health": "Core well-being: mood, anxiety, and stress on the same scale (1–10).",
+        "mental_health_desc": "Core well-being: mood, anxiety, and stress on the same scale (1–10).",
+        "sleep_analysis": "Sleep quantity (hours, bars) vs. sleep quality (1–5, line).",
+        "sleep_analysis_desc": "Sleep quantity (hours, bars) vs. sleep quality (1–5, line).",
+        "activity_mood": "Activity minutes (bars) alongside mood rating (line) — see the exercise effect.",
+        "activity_mood_desc": "Activity minutes (bars) alongside mood rating (line) — see the exercise effect.",
+        "social_wellness": "Social interactions (1–5) vs. mood (1–10) — does connection lift you?",
+        "social_wellness_desc": "Social interactions (1–5) vs. mood (1–10) — does connection lift you?",
+        "anxiety_stress": "Anxiety and stress levels side-by-side on a 1–10 scale.",
+        "anxiety_stress_desc": "Anxiety and stress levels side-by-side on a 1–10 scale."
+      },
+      "metrics": {
+        "moodRating": "Mood",
+        "anxietyLevel": "Anxiety",
+        "stressLevel": "Stress",
+        "sleepHours": "Sleep Hours",
+        "sleepQuality": "Sleep Quality",
+        "activityMinutes": "Activity (min)",
+        "socialInteractions": "Social Interactions"
+      },
+      "presetLabels": {
+        "mental_health": "Mental Health",
+        "sleep_analysis": "Sleep Analysis",
+        "activity_mood": "Activity & Mood",
+        "social_wellness": "Social Wellness",
+        "anxiety_stress": "Anxiety & Stress"
+      },
+      "frequency": {
+        "depression": "Depression",
+        "anxiety": "Anxiety",
+        "sleep": "Sleep",
+        "activity": "Activity"
+      },
+      "trendInfo": {
+        "title": "How is this calculated?",
+        "body": "Your selected period is split in two halves. For each metric, the average of the second half is compared to the first. Higher mood, sleep quality, activity, and social interactions count as improvements. Lower anxiety and stress count as improvements. Sleep hours are best near 8h. The overall percentage is the average improvement across all metrics in this preset."
+      }
     }
   },
   "log": {
@@ -29,6 +76,12 @@
     "saving": "Saving…",
     "success": "Your log was saved!",
     "error": "Couldn't save your log. Please try again.",
+    "duplicateModal": {
+      "title": "You've already logged today",
+      "description": "You have an existing log for today. Saving will replace it with your new entries.",
+      "cancel": "Cancel",
+      "confirm": "Replace log"
+    },
     "steps": {
       "mood": {
         "title": "How are you feeling today?",

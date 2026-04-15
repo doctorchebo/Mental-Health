@@ -87,7 +87,7 @@ export interface DailyLog {
 export type CreateLogDTO = Omit<
   DailyLog,
   "id" | "userId" | "createdAt" | "updatedAt"
->;
+> & { notes?: string | null };
 
 export type UpdateLogDTO = Partial<CreateLogDTO>;
 

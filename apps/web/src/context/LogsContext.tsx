@@ -17,6 +17,8 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
+  useRef,
   useState,
 } from "react";
 
@@ -35,6 +37,8 @@ export function LogsProvider({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
   const [logs, setLogs] = useState<DailyLog[]>([]);
   const [loading, setLoading] = useState(false);
+  const logsRef = useRef(logs);
+  logsRef.current = logs;
 
   const fetchLogs = useCallback(async (from?: string, to?: string) => {
     setLoading(true);
@@ -51,9 +55,36 @@ export function LogsProvider({ children }: { children: React.ReactNode }) {
   }, [user, fetchLogs]);
 
   const addLog = useCallback(async (dto: CreateLogDTO): Promise<DailyLog> => {
-    const created = await apiCreateLog(dto);
-    setLogs((prev) => [created, ...prev]);
-    return created;
+    try {
+      const created = await apiCreateLog(dto);
+      setLogs((prev) => [created, ...prev]);
+      return created;
+    } catch (err) {
+      // If a log already exists for this date, update it instead
+      if (err instanceof Error && err.message.includes("409")) {
+        const existing = logsRef.current.find((l) => l.logDate === dto.logDate);
+        if (existing) {
+          const updated = await apiUpdateLog(existing.id, dto);
+          setLogs((prev) =>
+            prev.map((l) => (l.id === existing.id ? updated : l)),
+          );
+          return updated;
+        }
+        // Existing log not in local state — refetch then patch
+        const fresh = await apiGetLogs(dto.logDate, dto.logDate);
+        if (fresh.length > 0) {
+          const updated = await apiUpdateLog(fresh[0].id, dto);
+          setLogs((prev) => {
+            const exists = prev.some((l) => l.id === fresh[0].id);
+            return exists
+              ? prev.map((l) => (l.id === fresh[0].id ? updated : l))
+              : [updated, ...prev];
+          });
+          return updated;
+        }
+      }
+      throw err;
+    }
   }, []);
 
   const updateLog = useCallback(async (id: string, dto: UpdateLogDTO) => {
@@ -66,13 +97,12 @@ export function LogsProvider({ children }: { children: React.ReactNode }) {
     await apiDeleteLog(id);
   }, []);
 
-  return (
-    <LogsContext.Provider
-      value={{ logs, loading, fetchLogs, addLog, updateLog, removeLog }}
-    >
-      {children}
-    </LogsContext.Provider>
+  const value = useMemo(
+    () => ({ logs, loading, fetchLogs, addLog, updateLog, removeLog }),
+    [logs, loading, fetchLogs, addLog, updateLog, removeLog],
   );
+
+  return <LogsContext.Provider value={value}>{children}</LogsContext.Provider>;
 }
 
 export function useLogs(): LogsContextValue {
