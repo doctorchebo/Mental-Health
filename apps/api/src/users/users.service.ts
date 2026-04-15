@@ -1,5 +1,5 @@
 import * as schema from '@mental-health/db/schema';
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { DRIZZLE } from '../db/db.module';
@@ -14,6 +14,8 @@ export interface GoogleProfile {
 
 @Injectable()
 export class UsersService {
+  private readonly logger = new Logger(UsersService.name);
+
   constructor(@Inject(DRIZZLE) private readonly db: Db) {}
 
   findById(id: string) {
@@ -42,6 +44,9 @@ export class UsersService {
         googleId: profile.googleId,
       })
       .returning();
+    this.logger.log(
+      `New user created via Google — userId: ${created.id}, email: ${created.email}`,
+    );
     return created;
   }
 

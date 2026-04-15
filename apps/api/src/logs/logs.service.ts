@@ -3,6 +3,7 @@ import {
   ConflictException,
   Inject,
   Injectable,
+  Logger,
   NotFoundException,
 } from '@nestjs/common';
 import { and, eq, gte, lte } from 'drizzle-orm';
@@ -15,6 +16,8 @@ type Db = NodePgDatabase<typeof schema>;
 
 @Injectable()
 export class LogsService {
+  private readonly logger = new Logger(LogsService.name);
+
   constructor(@Inject(DRIZZLE) private readonly db: Db) {}
 
   async create(userId: string, dto: CreateLogDto) {
@@ -48,12 +51,21 @@ export class LogsService {
           notes: dto.notes,
         })
         .returning();
-      return this.parseLog(log);
+      const parsed = this.parseLog(log);
+      this.logger.log(`Log created — id: ${parsed.id}, userId: ${userId}`);
+      return parsed;
     } catch (err: unknown) {
       const pgErr = err as { code?: string };
       if (pgErr?.code === '23505') {
+        this.logger.warn(
+          `Duplicate log attempt — userId: ${userId}, date: ${dto.logDate}`,
+        );
         throw new ConflictException('A log for this date already exists');
       }
+      this.logger.error(
+        'create failed',
+        err instanceof Error ? err.stack : String(err),
+      );
       throw err;
     }
   }
@@ -78,7 +90,10 @@ export class LogsService {
         eq(schema.dailyLogs.userId, userId),
       ),
     });
-    if (!row) throw new NotFoundException('Log not found');
+    if (!row) {
+      this.logger.warn(`Log not found — id: ${id}, userId: ${userId}`);
+      throw new NotFoundException('Log not found');
+    }
     return this.parseLog(row);
   }
 
@@ -113,7 +128,13 @@ export class LogsService {
       )
       .returning();
 
-    if (!updated) throw new NotFoundException('Log not found');
+    if (!updated) {
+      this.logger.warn(
+        `Update target not found — id: ${id}, userId: ${userId}`,
+      );
+      throw new NotFoundException('Log not found');
+    }
+    this.logger.log(`Log updated — id: ${updated.id}, userId: ${userId}`);
     return this.parseLog(updated);
   }
 
@@ -125,7 +146,13 @@ export class LogsService {
       )
       .returning();
 
-    if (!deleted) throw new NotFoundException('Log not found');
+    if (!deleted) {
+      this.logger.warn(
+        `Delete target not found — id: ${id}, userId: ${userId}`,
+      );
+      throw new NotFoundException('Log not found');
+    }
+    this.logger.log(`Log deleted — id: ${id}, userId: ${userId}`);
     return { ok: true };
   }
 

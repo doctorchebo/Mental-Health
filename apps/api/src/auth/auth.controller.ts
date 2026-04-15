@@ -1,6 +1,7 @@
 import {
   Controller,
   Get,
+  Logger,
   Post,
   Req,
   Res,
@@ -23,6 +24,8 @@ const COOKIE_DEFAULTS = {
 
 @Controller('auth')
 export class AuthController {
+  private readonly logger = new Logger(AuthController.name);
+
   constructor(
     private readonly authService: AuthService,
     private readonly usersService: UsersService,
@@ -39,6 +42,7 @@ export class AuthController {
   @UseGuards(AuthGuard('google'))
   googleCallback(@Req() req: Request, @Res() res: Response) {
     const user = req.user as { id: string; email: string };
+    this.logger.log(`Google OAuth callback — userId: ${user.id}`);
     const { accessToken, refreshToken } = this.authService.issueTokens(
       user.id,
       user.email,
@@ -61,18 +65,31 @@ export class AuthController {
   @Post('refresh')
   async refresh(@Req() req: Request, @Res() res: Response) {
     const token: string | undefined = req.cookies?.refresh_token;
-    if (!token) throw new UnauthorizedException('No refresh token');
+    if (!token) {
+      this.logger.warn('Token refresh attempted without a refresh cookie');
+      throw new UnauthorizedException('No refresh token');
+    }
 
-    const { accessToken } = await this.authService.refreshTokens(token);
-    res.cookie('access_token', accessToken, {
-      ...COOKIE_DEFAULTS,
-      maxAge: 15 * 60 * 1000,
-    });
-    return res.json({ ok: true });
+    try {
+      const { accessToken } = await this.authService.refreshTokens(token);
+      res.cookie('access_token', accessToken, {
+        ...COOKIE_DEFAULTS,
+        maxAge: 15 * 60 * 1000,
+      });
+      this.logger.log('Access token refreshed successfully');
+      return res.json({ ok: true });
+    } catch (error) {
+      this.logger.error(
+        'Token refresh failed',
+        error instanceof Error ? error.stack : String(error),
+      );
+      throw error;
+    }
   }
 
   @Post('logout')
   logout(@Res() res: Response) {
+    this.logger.log('User logged out');
     res.clearCookie('access_token', COOKIE_DEFAULTS);
     res.clearCookie('refresh_token', {
       ...COOKIE_DEFAULTS,

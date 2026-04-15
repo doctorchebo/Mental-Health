@@ -1,10 +1,12 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class AuthService {
+  private readonly logger = new Logger(AuthService.name);
+
   constructor(
     private readonly jwtService: JwtService,
     private readonly usersService: UsersService,
@@ -12,6 +14,7 @@ export class AuthService {
   ) {}
 
   issueTokens(userId: string, email: string) {
+    this.logger.log(`Issuing tokens — userId: ${userId}`);
     const payload = { sub: userId, email };
     const accessToken = this.jwtService.sign(payload, {
       secret: this.config.getOrThrow<string>('JWT_SECRET'),
@@ -31,12 +34,19 @@ export class AuthService {
         secret: this.config.getOrThrow<string>('JWT_REFRESH_SECRET'),
       });
     } catch {
+      this.logger.warn(
+        'Refresh token verification failed — invalid or expired token',
+      );
       throw new UnauthorizedException('Invalid refresh token');
     }
 
     const user = await this.usersService.findById(payload.sub);
-    if (!user) throw new UnauthorizedException('User not found');
+    if (!user) {
+      this.logger.warn(`Refresh failed — user not found: ${payload.sub}`);
+      throw new UnauthorizedException('User not found');
+    }
 
+    this.logger.log(`Token refreshed for user ${user.id}`);
     return this.issueTokens(user.id, user.email);
   }
 }

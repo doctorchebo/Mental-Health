@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   ParseUUIDPipe,
   Post,
@@ -20,12 +21,23 @@ import { LogsService } from './logs.service';
 @Controller('logs')
 @UseGuards(JwtAuthGuard)
 export class LogsController {
+  private readonly logger = new Logger(LogsController.name);
+
   constructor(private readonly logsService: LogsService) {}
 
   @Post()
-  create(@Req() req: Request, @Body() dto: CreateLogDto) {
-    const user = req.user as { id: string };
-    return this.logsService.create(user.id, dto);
+  async create(@Req() req: Request, @Body() dto: CreateLogDto) {
+    const { id: userId } = req.user as { id: string };
+    try {
+      const result = await this.logsService.create(userId, dto);
+      return result;
+    } catch (error) {
+      this.logger.error(
+        `create failed — userId: ${userId}, body: ${JSON.stringify(dto)}`,
+        error instanceof Error ? error.stack : String(error),
+      );
+      throw error;
+    }
   }
 
   @Get()
@@ -45,18 +57,36 @@ export class LogsController {
   }
 
   @Put(':id')
-  update(
+  async update(
     @Req() req: Request,
     @Param('id', ParseUUIDPipe) id: string,
     @Body() dto: UpdateLogDto,
   ) {
-    const user = req.user as { id: string };
-    return this.logsService.update(id, user.id, dto);
+    const { id: userId } = req.user as { id: string };
+    try {
+      const result = await this.logsService.update(id, userId, dto);
+      return result;
+    } catch (error) {
+      this.logger.error(
+        `update failed — id: ${id}, userId: ${userId}`,
+        error instanceof Error ? error.stack : String(error),
+      );
+      throw error;
+    }
   }
 
   @Delete(':id')
-  remove(@Req() req: Request, @Param('id', ParseUUIDPipe) id: string) {
-    const user = req.user as { id: string };
-    return this.logsService.remove(id, user.id);
+  async remove(@Req() req: Request, @Param('id', ParseUUIDPipe) id: string) {
+    const { id: userId } = req.user as { id: string };
+    try {
+      const result = await this.logsService.remove(id, userId);
+      return result;
+    } catch (error) {
+      this.logger.error(
+        `remove failed — id: ${id}, userId: ${userId}`,
+        error instanceof Error ? error.stack : String(error),
+      );
+      throw error;
+    }
   }
 }
