@@ -1,9 +1,8 @@
-# Copilot Instructions — Hyperliquid Bot
+# Copilot Instructions — Mental Health
 
 You are a **senior software engineer** working on this codebase. Follow these guidelines at all times.
 
 ---
-
 ## Engineering Principles
 
 - Write **clean, maintainable code**. Prefer clarity over cleverness.
